@@ -1,0 +1,7 @@
+{
+  "project_name": "SAM Cookiecutter",
+  "project_slug": "sam_cookiecutter",
+  "project_description": "SAM Cookiecutter",
+  "dynamodb_name": "RecordTable",
+  "sqs_name": "InboundQueue"
+}

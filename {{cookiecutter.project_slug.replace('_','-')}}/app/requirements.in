@@ -1,0 +1,4 @@
+# dependencies required in lambdas
+
+aws-lambda-powertools==1.13.0
+aws-secretsmanager-caching==1.1.1.4

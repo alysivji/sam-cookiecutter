@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: {{ cookiecutter.project_description }}
+
+Parameters:
+  ######################
+  # APPLICATION SETTINGS
+  ######################
+  EnvironmentTag:
+    Description: Which environment is this being deployed into?
+    Type: String
+    Default: development
+    AllowedValues:
+      - local
+      - development
+      - staging
+      - production
+
+Globals:
+  Function:
+    Timeout: 120
+    Environment:
+      Variables:
+        ENVIRONMENT: !Ref EnvironmentTag
+        LOG_LEVEL: DEBUG
+        POWERTOOLS_SERVICE_NAME: {{cookiecutter.project_slug.replace('_','-')}}
+
+Resources:
+  BucketTriggerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: [function]-lambda
+      CodeUri: ./app/
+      Handler: {{cookiecutter.project_slug}}.handler.lambda_handler
+      Runtime: python3.8
